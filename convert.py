@@ -206,11 +206,11 @@ def convert_model(path, dtype):
         list(filter(lambda x: "blocks" in x and "ln1.bias" in x, w.keys())))
 
 
-    ops = opslist.RWKVOnnxOps(layers,dims,dtype=dtype, opsVersion=version.get(), externalData=use_external_data.get(), splitExternalData=splitExternalData.get(), fp32inout=fp32inout.get(), quantized=mybits.get()==8, heads=headsnume)
+    ops = opslist.RWKVOnnxOps(layers,dims,dtype=dtype, opsVersion=15, externalData=True, splitExternalData=False, fp32inout=False, quantized=True, heads=headsnume)
 
     RnnRWKV(ops,w)
 
-
+"""
 import tkinter as tk
 from tkinter import filedialog
 
@@ -218,7 +218,7 @@ from tkinter import filedialog
 # Create the main window
 root = tk.Tk()
 root.title("File Converter")
-
+"""
 # Define the functions
 def choose_input_file():
     input_file = filedialog.askopenfilename()
@@ -226,9 +226,12 @@ def choose_input_file():
 
 import numpy as np
 def convert():
-    path = input_path.get()
-    dtype = np.float16 if mybits.get()==16 else np.float32
+    path = "/content/RWKV-x070-World-0.4B-v2.9-20250107-ctx4096.pth"
+    dtype = np.float16
     convert_model(path, dtype)
+
+convert()
+"""
 
 # Define the variables
 input_path = tk.StringVar()
@@ -275,3 +278,4 @@ convert_button.grid(row=3, column=2)
 
 # Start the main event loop
 root.mainloop()
+"""
