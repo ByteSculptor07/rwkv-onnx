@@ -10,7 +10,8 @@ def RnnRWKV(ops:opslist.RWKVOnnxOps, *args):
             print("Legacy RWKV")
 
             self.ops = ops
-            self.headsnume, self.headsize = w[f"blocks.0.att.time_decay"].shape
+            #self.headsnume, self.headsize = w[f"blocks.0.att.time_decay"].shape
+            self.headsnume, self.headsize, unimportantvar2 = w[f"blocks.0.att.w0"].shape
            
             self.postprocess0 = ops.initTensor((w["ln_out.weight"]))
             self.postprocess1 = ops.initTensor((w["ln_out.bias"]))
