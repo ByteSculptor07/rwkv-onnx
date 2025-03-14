@@ -201,7 +201,8 @@ def convert_model(path, dtype):
             os.remove(file)
     w = torch.load(path, map_location="cpu")
     dims = len(w["blocks.0.att.key.weight"])
-    headsnume, headsize = w[f"blocks.0.att.time_decay"].shape
+    #headsnume, headsize = w[f"blocks.0.att.time_decay"].shape
+    headsnume, headsize, unimportantvar = w[f"blocks.0.att.w0"].shape
     layers = len(
         list(filter(lambda x: "blocks" in x and "ln1.bias" in x, w.keys())))
 
